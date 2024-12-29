@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend Application
+
+This frontend application is built with **Next.js**, using the **Aceternity UI** library and **JavaScript**, styled with the **TailwindCSS** framework for a modern and responsive design.
+
+---
 
 ## Getting Started
 
