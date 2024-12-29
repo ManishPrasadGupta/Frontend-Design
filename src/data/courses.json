@@ -1,0 +1,105 @@
+{
+    "courses":[
+      {
+        "id": 11,
+        "title": "Personal Finance 101",
+        "slug": "personal-finance-101",
+        "description": "Learn how to manage your money, invest wisely, and plan for the future.",
+        "price": 39.99,
+        "instructor": "Charlotte Harris",
+        "isFeatured": false,
+        "image": "/courses/ss.jpg" 
+      },
+      {
+        "id": 2,
+        "title": "Python Programming",
+        "slug": "python-programming",
+        "description": "Master Python programming from beginner to advanced level with hands-on projects.",
+        "price": 79.99,
+        "instructor": "Jane Smith",
+        "isFeatured": true,
+        "image": "/courses/ss.jpg" 
+      },
+      {
+        "id": 3,
+        "title": "Digital Photography",
+        "slug": "digital-photography",
+        "description": "Learn how to take stunning photographs and edit them like a pro.",
+        "price": 59.99,
+        "instructor": "Emily Davis",
+        "isFeatured": false,
+        "image": "/courses/ss.jpg" 
+      },
+      {
+        "id": 4,
+        "title": "Web Development Bootcamp",
+        "slug": "web-development-bootcamp",
+        "description": "Become a full-stack web developer with our intensive bootcamp course.",
+        "price": 129.99,
+        "instructor": "Michael Johnson",
+        "isFeatured": true,
+          "image": "/courses/ss.jpg" 
+      },
+      {
+        "id": 5,
+        "title": "Yoga for Beginners",
+        "slug": "yoga-for-beginners",
+        "description": "Improve your flexibility and mental health with our beginner-friendly yoga course.",
+        "price": 49.99,
+        "instructor": "Sophia Brown",
+        "isFeatured": false,
+          "image": "/courses/ss.jpg"  
+      },
+      {
+        "id": 6,
+        "title": "Creative Writing Workshop",
+        "slug": "creative-writing-workshop",
+        "description": "Unleash your creativity and learn the art of storytelling with this workshop.",
+        "price": 69.99,
+        "instructor": "William Taylor",
+        "isFeatured": true,
+          "image": "/courses/ss.jpg"
+      },
+      {
+        "id": 7,
+        "title": "Data Science with Python",
+        "slug": "data-science-python",
+        "description": "Analyze data and build predictive models using Python.",
+        "price": 149.99,
+        "instructor": "Olivia Wilson",
+        "isFeatured": false,
+          "image": "/courses/ss.jpg"
+      },
+      {
+        "id": 8,
+        "title": "Cooking Masterclass",
+        "slug": "cooking-masterclass",
+        "description": "Learn to cook gourmet meals with step-by-step guidance from a professional chef.",
+        "price": 89.99,
+        "instructor": "James Anderson",
+        "isFeatured": false,
+          "image": "/courses/ss.jpg"
+      },
+      {
+        "id": 9,
+        "title": "Graphic Design Essentials",
+        "slug": "graphic-design-essentials",
+        "description": "Learn the principles of graphic design and create stunning visuals.",
+        "price": 99.99,
+        "instructor": "Isabella Martinez",
+        "isFeatured": true,
+          "image": "/courses/ss.jpg"
+      },
+      {
+        "id": 10,
+        "title": "Machine Learning Basics",
+        "slug": "machine-learning-basics",
+        "description": "Understand the fundamentals of machine learning and build your first model.",
+        "price": 199.99,
+        "instructor": "Ethan Thomas",
+        "isFeatured": true,
+          "image": "/courses/ss.jpg"
+      }
+    ]    
+  }
+  
