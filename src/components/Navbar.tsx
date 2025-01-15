@@ -1,12 +1,8 @@
-//'use client'  use hota hai kyuki hum direct react ke hooks use nahi kar sakte toh issliye yeh use karke hum react hooks use kar sakte hain...
 'use client';
-
-
 import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
 
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
@@ -50,4 +46,4 @@ function Navbar({ className }: { className?: string }) {
   )
 }
 
-export default Navbar
+export default Navbar;

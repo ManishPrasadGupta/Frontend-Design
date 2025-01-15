@@ -1,113 +1,121 @@
 "use client";
-
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import React from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import Image from "next/image";
 
-export const StickyScroll = ({
-  content,
-  contentClassName,
+const transition = {
+  type: "spring",
+  mass: 0.5,
+  damping: 11.5,
+  stiffness: 100,
+  restDelta: 0.001,
+  restSpeed: 0.001,
+};
+
+export const MenuItem = ({
+  setActive,
+  active,
+  item,
+  children,
 }: {
-  content: {
-    title: string;
-    description: string;
-    content?: React.ReactNode;
-  }[];
-  contentClassName?: string;
+  setActive: (item: string) => void;
+  active: string | null;
+  item: string;
+  children?: React.ReactNode;
 }) => {
-  const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
-    container: ref,
-    offset: ["start start", "end start"],
-  });
-  const cardLength = content.length;
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const cardsBreakpoints = content.map((_, index) => index / cardLength);
-    const closestBreakpointIndex = cardsBreakpoints.reduce(
-      (acc, breakpoint, index) => {
-        const distance = Math.abs(latest - breakpoint);
-        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
-          return index;
-        }
-        return acc;
-      },
-      0
-    );
-    setActiveCard(closestBreakpointIndex);
-  });
-
-  const backgroundColors = [
-    "var(--slate-900)",
-    "var(--black)",
-    "var(--neutral-900)",
-  ];
-  const linearGradients = useMemo(() => [
-    "linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
-    "linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
-    "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
-  ], []);
-
-  const [backgroundGradient, setBackgroundGradient] = useState(
-    linearGradients[0]
-  );
-
-  useEffect(() => {
-    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-  }, [activeCard, linearGradients]);
-
   return (
-    <motion.div
-      animate={{
-        backgroundColor: backgroundColors[activeCard % backgroundColors.length],
-      }}
-      className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
-      ref={ref}
-    >
-      <div className="div relative flex items-start px-4">
-        <div className="max-w-2xl">
-          {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
-              <motion.h2
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-2xl font-bold text-slate-100"
-              >
-                {item.title}
-              </motion.h2>
-              <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-kg text-slate-300 max-w-sm mt-10"
-              >
-                {item.description}
-              </motion.p>
-            </div>
-          ))}
-          <div className="h-40" />
-        </div>
-      </div>
-      <div
-        style={{ background: backgroundGradient }}
-        className={cn(
-          "hidden lg:block h-60 w-80 rounded-md bg-white sticky top-10 overflow-hidden",
-          contentClassName
-        )}
+    <div onMouseEnter={() => setActive(item)} className="relative ">
+      <motion.p
+        transition={{ duration: 0.3 }}
+        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
       >
-        {content[activeCard].content ?? null}
+        {item}
+      </motion.p>
+      {active !== null && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={transition}
+        >
+          {active === item && children && (
+            <div className="absolute top-[calc(100%_+_1.7rem)] left-1/2 transform -translate-x-1/2">
+              <motion.div
+                transition={transition}
+                layoutId="active" // layoutId ensures smooth animation
+                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+              >
+                <motion.div
+                  layout // layout ensures smooth animation
+                  className="w-max h-full p-4"
+                >
+                  {children}
+                </motion.div>
+              </motion.div>
+            </div>
+          )}
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+export const Menu = ({
+  setActive,
+  children,
+}: {
+  setActive: (item: string | null) => void;
+  children: React.ReactNode;
+}) => {
+  return (
+    <nav
+      onMouseLeave={() => setActive(null)} // resets the state
+      className="relative rounded-full boder border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
+    >
+      {children}
+    </nav>
+  );
+};
+
+export const ProductItem = ({
+  title,
+  description,
+  href,
+  src,
+}: {
+  title: string;
+  description: string;
+  href: string;
+  src: string;
+}) => {
+  return (
+    <Link href={href} className="flex space-x-2">
+      <Image
+        src={src}
+        width={140}
+        height={70}
+        alt={title}
+        className="flex-shrink-0 rounded-md shadow-2xl"
+      />
+      <div>
+        <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
+          {title}
+        </h4>
+        <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
+          {description}
+        </p>
       </div>
-    </motion.div>
+    </Link>
+  );
+};
+
+export const HoveredLink = ({ children, ...rest }: React.ComponentProps<typeof Link>) => {
+  return (
+    <Link
+      {...rest}
+      className="text-neutral-700 dark:text-neutral-200 hover:text-black "
+    >
+      {children}
+    </Link>
   );
 };
